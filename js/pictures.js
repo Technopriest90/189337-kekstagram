@@ -10,7 +10,11 @@ addPhotos(photoUnits, photoTemplate, photosPlace);
 var cardPlace = document.querySelector('.gallery-overlay');
 cardPlace.classList.remove('hidden');
 addDataToCard(photoUnits[0], cardPlace);
-
+/**
+ * Gets an array of numbers from 1 to number.
+ * @param {array} number - The last number in the array.
+ * @return {array} newArr - Returns an array from 1 to number.
+ */
 function getArrayOfNumbers(number) {
   var newArr = new Array(number);
   var counter = 1;
@@ -19,15 +23,28 @@ function getArrayOfNumbers(number) {
   }
   return newArr;
 }
-
+/**
+ * Gets a random number from the range includes extreme values
+ * @param {number} min - The minimum value of the range.
+ * @param {number} max - The maximum value of the range.
+ * @return {string} - Returns a random number from range.
+ */
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
+/**
+ * Gets a random nonreapeating element from an array
+ * @param {array} array - Group of elements to produce a random from them.
+ * @return {string} - Returns a random nonreapeating element of the array.
+ */
 function getNonrepeatingRandomValue(array) {
   return array.splice(Math.floor(Math.random() * array.length), 1);
 }
-
+/**
+ * Gets a random subarray from an array with maximum length of 2.
+ * @param {array} array - Group of elements to extract the subarray.
+ * @return {array} newArr - Returns a random subarray with length 1 or 2.
+ */
 function getRandomArray(array) {
   var newArr = new Array(getRandomNumber(1, 2));
   var temp = array.slice();
@@ -36,7 +53,13 @@ function getRandomArray(array) {
   }
   return newArr;
 }
-
+/**
+ * Creates an array of photo units based on the obtained data.
+ * @param {array} numbers - An array of the numbers for pictures.
+ * @param {array} comments - An array of comments to photos.
+ * @param {number} count - Number of photos.
+ * @return {array} photos - Returns an array of photo units.
+ */
 function getPhotoUnits(numbers, comments, count) {
   var photos = new Array(count);
   for (var i = 0; i < photos.length; i++) {
@@ -48,7 +71,12 @@ function getPhotoUnits(numbers, comments, count) {
   }
   return photos;
 }
-
+/**
+ * Generates a photo.
+ * @param {object} photoUnit - Information about the photo.
+ * @param {object} template - The template of photo.
+ * @return {object} photo - Returns render photo.
+ */
 function renderPhoto(photoUnit, template) {
   var photo = template.cloneNode(true);
   photo.querySelector('img').setAttribute('src', photoUnit.url);
@@ -56,7 +84,12 @@ function renderPhoto(photoUnit, template) {
   photo.querySelector('.picture-comments').textContent = photoUnit.comments;
   return photo;
 }
-
+/**
+ * Add pins to markup.
+ * @param {object} photos - Information about the photos.
+ * @param {object} template - The template of photo.
+ * @param {object} photoPlace - Place to add a photo.
+ */
 function addPhotos(photos, template, photoPlace) {
   var temp = document.createDocumentFragment();
   for (var i = 0; i < photos.length; i++) {
@@ -64,7 +97,11 @@ function addPhotos(photos, template, photoPlace) {
   }
   photoPlace.appendChild(temp);
 }
-
+/**
+ * Adds information about photo to card.
+ * @param {object} photoUnit - Information about photo.
+ * @param {object} place - The location of the card.
+ */
 function addDataToCard(photoUnit, place) {
   place.querySelector('.gallery-overlay-image').setAttribute('src', photoUnit.url);
   place.querySelector('.likes-count').textContent = photoUnit.likes;
